@@ -1,0 +1,7 @@
+build/
+.qtcreator/
+DeepSeekCompanion/
+dsh-setup-backups/
+icon-backup-*/
+*.zip
+preview.png
