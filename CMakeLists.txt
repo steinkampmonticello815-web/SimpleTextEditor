@@ -13,6 +13,10 @@ qt_add_executable(SimpleTextEditor
     mainwindow.h
     mainwindow.ui
     action_icons.qrc
+    dialog_assets.qrc
+    aboutdialog.h aboutdialog.cpp aboutdialog.ui
+    finddialog.h finddialog.cpp finddialog.ui
+    replacedialog.h replacedialog.cpp replacedialog.ui
 )
 
 target_link_libraries(SimpleTextEditor

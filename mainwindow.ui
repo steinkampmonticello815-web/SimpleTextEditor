@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>999</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,9 +25,6 @@
      <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
@@ -56,7 +53,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>999</width>
      <height>13</height>
     </rect>
    </property>
@@ -113,13 +110,33 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menu_v">
+    <property name="title">
+     <string>查看(&amp;v)</string>
+    </property>
+    <addaction name="tool"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuFormat"/>
    <addaction name="menuView"/>
    <addaction name="menuHelp"/>
+   <addaction name="menu_v"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>26</height>
+    </size>
+   </property>
+  </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="windowTitle">
     <string>常用工具栏</string>
@@ -148,9 +165,12 @@
    <addaction name="actionReplace"/>
   </widget>
   <action name="actionNew">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/New.png</normaloff>:/action-icons/New.png</iconset></property>
    <property name="checkable">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/New.png</normaloff>:/action-icons/New.png</iconset>
    </property>
    <property name="text">
     <string>新建(&amp;N)</string>
@@ -160,7 +180,10 @@
    </property>
   </action>
   <action name="actionOpen">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Open.png</normaloff>:/action-icons/Open.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Open.png</normaloff>:/action-icons/Open.png</iconset>
+   </property>
    <property name="text">
     <string>打开(&amp;O)...</string>
    </property>
@@ -169,7 +192,10 @@
    </property>
   </action>
   <action name="actionSave">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Save.png</normaloff>:/action-icons/Save.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Save.png</normaloff>:/action-icons/Save.png</iconset>
+   </property>
    <property name="text">
     <string>保存(&amp;S)</string>
    </property>
@@ -178,7 +204,10 @@
    </property>
   </action>
   <action name="actionSaveAs">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/SaveAs.png</normaloff>:/action-icons/SaveAs.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/SaveAs.png</normaloff>:/action-icons/SaveAs.png</iconset>
+   </property>
    <property name="text">
     <string>另存为(&amp;A)...</string>
    </property>
@@ -187,7 +216,10 @@
    </property>
   </action>
   <action name="actionClose">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Close.png</normaloff>:/action-icons/Close.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Close.png</normaloff>:/action-icons/Close.png</iconset>
+   </property>
    <property name="text">
     <string>关闭窗口(&amp;W)</string>
    </property>
@@ -196,7 +228,10 @@
    </property>
   </action>
   <action name="actionExit">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Exit.png</normaloff>:/action-icons/Exit.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Exit.png</normaloff>:/action-icons/Exit.png</iconset>
+   </property>
    <property name="text">
     <string>退出(&amp;X)</string>
    </property>
@@ -205,9 +240,12 @@
    </property>
   </action>
   <action name="actionUndo">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Undo.png</normaloff>:/action-icons/Undo.png</iconset></property>
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Undo.png</normaloff>:/action-icons/Undo.png</iconset>
    </property>
    <property name="text">
     <string>撤销(&amp;U)</string>
@@ -217,9 +255,12 @@
    </property>
   </action>
   <action name="actionRedo">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Redo.png</normaloff>:/action-icons/Redo.png</iconset></property>
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Redo.png</normaloff>:/action-icons/Redo.png</iconset>
    </property>
    <property name="text">
     <string>重做(&amp;R)</string>
@@ -229,9 +270,12 @@
    </property>
   </action>
   <action name="actionCut">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Cut.png</normaloff>:/action-icons/Cut.png</iconset></property>
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Cut.png</normaloff>:/action-icons/Cut.png</iconset>
    </property>
    <property name="text">
     <string>剪切(&amp;T)</string>
@@ -241,9 +285,12 @@
    </property>
   </action>
   <action name="actionCopy">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Copy.png</normaloff>:/action-icons/Copy.png</iconset></property>
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Copy.png</normaloff>:/action-icons/Copy.png</iconset>
    </property>
    <property name="text">
     <string>复制(&amp;C)</string>
@@ -253,7 +300,10 @@
    </property>
   </action>
   <action name="actionPaste">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Paste.png</normaloff>:/action-icons/Paste.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Paste.png</normaloff>:/action-icons/Paste.png</iconset>
+   </property>
    <property name="text">
     <string>粘贴(&amp;P)</string>
    </property>
@@ -262,7 +312,10 @@
    </property>
   </action>
   <action name="actionSelectAll">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/SelectAll.png</normaloff>:/action-icons/SelectAll.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/SelectAll.png</normaloff>:/action-icons/SelectAll.png</iconset>
+   </property>
    <property name="text">
     <string>全选(&amp;A)</string>
    </property>
@@ -271,7 +324,10 @@
    </property>
   </action>
   <action name="actionFind">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Find.png</normaloff>:/action-icons/Find.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Find.png</normaloff>:/action-icons/Find.png</iconset>
+   </property>
    <property name="text">
     <string>查找(&amp;F)...</string>
    </property>
@@ -280,7 +336,10 @@
    </property>
   </action>
   <action name="actionFindNext">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/FindNext.png</normaloff>:/action-icons/FindNext.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/FindNext.png</normaloff>:/action-icons/FindNext.png</iconset>
+   </property>
    <property name="text">
     <string>查找下一个(&amp;N)</string>
    </property>
@@ -289,7 +348,10 @@
    </property>
   </action>
   <action name="actionReplace">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Replace.png</normaloff>:/action-icons/Replace.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Replace.png</normaloff>:/action-icons/Replace.png</iconset>
+   </property>
    <property name="text">
     <string>替换(&amp;H)...</string>
    </property>
@@ -298,75 +360,122 @@
    </property>
   </action>
   <action name="actionFont">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/Font.png</normaloff>:/action-icons/Font.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/Font.png</normaloff>:/action-icons/Font.png</iconset>
+   </property>
    <property name="text">
     <string>字体与字号(&amp;F)...</string>
    </property>
   </action>
   <action name="actionTextColor">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/TextColor.png</normaloff>:/action-icons/TextColor.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/TextColor.png</normaloff>:/action-icons/TextColor.png</iconset>
+   </property>
    <property name="text">
     <string>字体颜色(&amp;C)...</string>
    </property>
   </action>
   <action name="actionBackgroundColor">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/BackgroundColor.png</normaloff>:/action-icons/BackgroundColor.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/BackgroundColor.png</normaloff>:/action-icons/BackgroundColor.png</iconset>
+   </property>
    <property name="text">
     <string>编辑器背景色(&amp;B)...</string>
    </property>
   </action>
   <action name="actionWordWrap">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/WordWrap.png</normaloff>:/action-icons/WordWrap.png</iconset></property>
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/WordWrap.png</normaloff>:/action-icons/WordWrap.png</iconset>
    </property>
    <property name="text">
     <string>自动换行(&amp;W)</string>
    </property>
   </action>
   <action name="actionShowToolbar">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/ShowToolbar.png</normaloff>:/action-icons/ShowToolbar.png</iconset></property>
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/ShowToolbar.png</normaloff>:/action-icons/ShowToolbar.png</iconset>
    </property>
    <property name="text">
     <string>显示工具栏(&amp;T)</string>
    </property>
   </action>
   <action name="actionShowStatusbar">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/ShowStatusbar.png</normaloff>:/action-icons/ShowStatusbar.png</iconset></property>
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/ShowStatusbar.png</normaloff>:/action-icons/ShowStatusbar.png</iconset>
+   </property>
    <property name="text">
     <string>显示状态栏(&amp;S)</string>
    </property>
   </action>
   <action name="actionLineNumbers">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/LineNumbers.png</normaloff>:/action-icons/LineNumbers.png</iconset></property>
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/LineNumbers.png</normaloff>:/action-icons/LineNumbers.png</iconset>
    </property>
    <property name="text">
     <string>显示行号(&amp;L)</string>
    </property>
   </action>
   <action name="actionAbout">
-   <property name="icon"><iconset resource="action_icons.qrc"><normaloff>:/action-icons/About.png</normaloff>:/action-icons/About.png</iconset></property>
+   <property name="icon">
+    <iconset resource="action_icons.qrc">
+     <normaloff>:/action-icons/About.png</normaloff>:/action-icons/About.png</iconset>
+   </property>
    <property name="text">
     <string>关于(&amp;A)...</string>
    </property>
   </action>
+  <action name="Action">
+   <property name="text">
+    <string>阿斯顿</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="tool">
+   <property name="icon">
+    <iconset resource="dialog_assets.qrc">
+     <normaloff>:/dialogs/about.jpg</normaloff>:/dialogs/about.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>工具栏(&amp;T)</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
- <resources><include location="action_icons.qrc"/></resources>
+ <resources>
+  <include location="action_icons.qrc"/>
+  <include location="dialog_assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

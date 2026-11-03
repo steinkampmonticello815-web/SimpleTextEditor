@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QLabel>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -17,7 +17,23 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+private slots:
+    void on_actionAbout_triggered();
+    void on_actionFind_triggered();
+    void on_actionReplace_triggered();
+    void on_actionShowStatusbar_triggered();
+    void on_actionShowToolbar_triggered();
+    void on_actionShowStatusbar_triggered(bool checked);
+    void on_actionShowToolbar_triggered(bool checked);
+
 private:
+    void updateStatusBar();
+
     Ui::MainWindow *ui;
+    QLabel *lengthLabel;
+    QLabel *linesLabel;
+    QLabel *lnLabel;
+    QLabel *colLabel;
+    QLabel *userLabel;
 };
 #endif // MAINWINDOW_H

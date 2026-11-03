@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>540</width>
+    <height>420</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>540</width>
+    <height>420</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Microsoft YaHei UI</family>
+    <pointsize>14</pointsize>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>关于</string>
+  </property>
+  <property name="styleSheet">
+   <string>QDialog { background: #f3f3f3; color: #202020; }
+QLabel { color: #202020; background: transparent; }
+QLineEdit { background: #ffffff; color: #202020; border: 1px solid #8a8a8a; border-radius: 3px; padding: 8px 10px; min-height: 26px; selection-background-color: #005fb8; selection-color: white; }
+QLineEdit:focus { border: 2px solid #005fb8; padding: 7px 9px; }
+QPushButton { color: #202020; background: #ffffff; border: 1px solid #929292; border-radius: 4px; padding: 7px 16px; min-height: 28px; }
+QPushButton:hover { background: #e6eff8; border-color: #005fb8; }
+QPushButton:pressed { background: #cddff2; }
+QPushButton:focus { border: 2px solid #005fb8; padding: 6px 15px; }
+QPushButton#pushButtonOk, QPushButton#pushButtonFindNext, QPushButton#pushButtonReplace { background: #005fb8; color: #ffffff; border-color: #005fb8; }
+QPushButton#pushButtonOk:hover, QPushButton#pushButtonFindNext:hover, QPushButton#pushButtonReplace:hover { background: #004d96; }
+QPushButton#pushButtonOk:pressed, QPushButton#pushButtonFindNext:pressed, QPushButton#pushButtonReplace:pressed { background: #003d76; }
+QPushButton#pushButtonOk:focus, QPushButton#pushButtonFindNext:focus, QPushButton#pushButtonReplace:focus { border-color: #80bfff; }
+</string>
+  </property>
+  <widget class="QLabel" name="labelArtwork">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>104</width>
+     <height>104</height>
+    </size>
+   </property>
+   <property name="text">
+    <string />
+   </property>
+   <property name="pixmap">
+    <pixmap resource="dialog_assets.qrc">:/dialogs/about.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>67</y>
+     <width>561</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="labelTitle">
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei UI</family>
+          <pointsize>22</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>简单文本编辑器</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelDescription">
+        <property name="text">
+         <string>基于 Qt Widgets 开发的文本编辑器</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="metadataLayout">
+        <item>
+         <widget class="QLabel" name="labelVersion">
+          <property name="text">
+           <string>版本：1.0.0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelAuthor">
+          <property name="text">
+           <string>作者：lhj</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonOk">
+        <property name="minimumSize">
+         <size>
+          <width>128</width>
+          <height>44</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>确定</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="rightSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>pushButtonOk</tabstop>
+ </tabstops>
+ <resources>
+  <include location="dialog_assets.qrc" />
+ </resources>
+ <connections>
+  </connections>
+</ui>
