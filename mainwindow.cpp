@@ -4,13 +4,13 @@
 #include "finddialog.h"
 #include "replacedialog.h"
 #include <QMessageBox>
-#include <QApplication>
 #include <QClipboard>
+#include <QApplication>
 #include <QTextCursor>
 #include <QTextDocument>
-#include <QFontDialog>
-#include <QColorDialog>
 #include <QPalette>
+#include <QColorDialog>
+#include <QFontDialog>
 
 namespace {
 // Search from the current cursor, wrapping once without losing the selection on failure.
@@ -31,8 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // 初始化时让编辑器换行模式与现有菜单勾选状态保持一致。
-    on_actionWordWrap_toggled(ui->actionWordWrap->isChecked());
 
     // 菜单项和工具栏共用 QAction，两处会同步更新。
     connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,
@@ -56,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionPaste, &QAction::triggered,
             ui->plainTextEdit, &QPlainTextEdit::paste);
 
+    on_actionWordWrap_toggled(ui->actionWordWrap->isChecked());
     lengthLabel = new QLabel("length: 0", this);
     linesLabel = new QLabel("lines: 1", this);
     lnLabel = new QLabel("Ln: 1", this);
@@ -171,6 +170,7 @@ void MainWindow::on_actionShowToolbar_triggered(bool checked)
 {
     ui->mainToolBar->setVisible(checked);
 }
+
 
 void MainWindow::on_actionFont_triggered()
 {
