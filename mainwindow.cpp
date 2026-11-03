@@ -8,6 +8,9 @@
 #include <QClipboard>
 #include <QTextCursor>
 #include <QTextDocument>
+#include <QFontDialog>
+#include <QColorDialog>
+#include <QPalette>
 
 namespace {
 // Search from the current cursor, wrapping once without losing the selection on failure.
@@ -28,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // 初始化时让编辑器换行模式与现有菜单勾选状态保持一致。
+    on_actionWordWrap_toggled(ui->actionWordWrap->isChecked());
 
     // 菜单项和工具栏共用 QAction，两处会同步更新。
     connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,
@@ -165,4 +170,43 @@ void MainWindow::on_actionShowStatusbar_triggered(bool checked)
 void MainWindow::on_actionShowToolbar_triggered(bool checked)
 {
     ui->mainToolBar->setVisible(checked);
+}
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok = false;
+    const QFont font = QFontDialog::getFont(
+        &ok, ui->plainTextEdit->font(), this, tr("设置字体"));
+    if (ok)
+        ui->plainTextEdit->setFont(font);
+}
+
+void MainWindow::on_actionTextColor_triggered()
+{
+    const QColor color = QColorDialog::getColor(
+        ui->plainTextEdit->palette().color(QPalette::Text),
+        this, tr("设置字体颜色"));
+    if (!color.isValid())
+        return;
+    QPalette palette = ui->plainTextEdit->palette();
+    palette.setColor(QPalette::Text, color);
+    ui->plainTextEdit->setPalette(palette);
+}
+
+void MainWindow::on_actionBackgroundColor_triggered()
+{
+    const QColor color = QColorDialog::getColor(
+        ui->plainTextEdit->palette().color(QPalette::Base),
+        this, tr("设置编辑器背景颜色"));
+    if (!color.isValid())
+        return;
+    QPalette palette = ui->plainTextEdit->palette();
+    palette.setColor(QPalette::Base, color);
+    ui->plainTextEdit->setPalette(palette);
+}
+
+void MainWindow::on_actionWordWrap_toggled(bool checked)
+{
+    ui->plainTextEdit->setLineWrapMode(
+        checked ? QPlainTextEdit::WidgetWidth : QPlainTextEdit::NoWrap);
 }

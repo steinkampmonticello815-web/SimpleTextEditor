@@ -18,6 +18,10 @@ public:
     ~MainWindow() override;
 
 private slots:
+    void on_actionFont_triggered();
+    void on_actionTextColor_triggered();
+    void on_actionBackgroundColor_triggered();
+    void on_actionWordWrap_toggled(bool checked);
     void on_actionAbout_triggered();
     void on_actionFind_triggered();
     void on_actionReplace_triggered();
