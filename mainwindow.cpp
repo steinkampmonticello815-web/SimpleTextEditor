@@ -4,6 +4,8 @@
 #include "finddialog.h"
 #include "replacedialog.h"
 #include <QMessageBox>
+#include <QApplication>
+#include <QClipboard>
 #include <QTextCursor>
 #include <QTextDocument>
 
@@ -26,6 +28,29 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // 菜单项和工具栏共用 QAction，两处会同步更新。
+    connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,
+            ui->actionCut, &QAction::setEnabled);
+    connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,
+            ui->actionCopy, &QAction::setEnabled);
+    ui->actionCut->setEnabled(ui->plainTextEdit->textCursor().hasSelection());
+    ui->actionCopy->setEnabled(ui->plainTextEdit->textCursor().hasSelection());
+
+    const auto updatePasteAction = [this]() {
+        ui->actionPaste->setEnabled(ui->plainTextEdit->canPaste());
+    };
+    connect(QApplication::clipboard(), &QClipboard::dataChanged,
+            this, updatePasteAction);
+    updatePasteAction();
+
+    connect(ui->actionCut, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::cut);
+    connect(ui->actionCopy, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::copy);
+    connect(ui->actionPaste, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::paste);
+
     lengthLabel = new QLabel("length: 0", this);
     linesLabel = new QLabel("lines: 1", this);
     lnLabel = new QLabel("Ln: 1", this);
@@ -131,8 +156,13 @@ void MainWindow::on_actionReplace_triggered()
     dialog.exec();
 }
 
-void MainWindow::on_actionShowStatusbar_triggered()
+void MainWindow::on_actionShowStatusbar_triggered(bool checked)
 {
     ui->statusbar->setVisible(checked);
 }
 
+
+void MainWindow::on_actionShowToolbar_triggered(bool checked)
+{
+    ui->mainToolBar->setVisible(checked);
+}

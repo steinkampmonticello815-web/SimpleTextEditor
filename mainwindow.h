@@ -21,8 +21,6 @@ private slots:
     void on_actionAbout_triggered();
     void on_actionFind_triggered();
     void on_actionReplace_triggered();
-    void on_actionShowStatusbar_triggered();
-    void on_actionShowToolbar_triggered();
     void on_actionShowStatusbar_triggered(bool checked);
     void on_actionShowToolbar_triggered(bool checked);
 
