@@ -29,6 +29,16 @@ private slots:
     void on_actionShowToolbar_triggered(bool checked);
 
 private:
+    void closeEvent(QCloseEvent *event) override;
+    bool maybeSave();
+    bool saveFile();
+    bool saveFileAs();
+    bool writeFile(const QString &path);
+    bool loadFile(const QString &path);
+    void newFile();
+    void openFile();
+    void setCurrentFile(const QString &path);
+    QString currentFile;
     void updateStatusBar();
 
     Ui::MainWindow *ui;

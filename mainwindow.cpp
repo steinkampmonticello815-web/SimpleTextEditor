@@ -11,6 +11,12 @@
 #include <QPalette>
 #include <QColorDialog>
 #include <QFontDialog>
+#include <QCloseEvent>
+#include <QFileDialog>
+#include <QFile>
+#include <QFileInfo>
+#include <QSaveFile>
+#include <QStringConverter>
 
 namespace {
 // Search from the current cursor, wrapping once without losing the selection on failure.
@@ -74,11 +80,120 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->plainTextEdit, &QPlainTextEdit::cursorPositionChanged,
             this, &MainWindow::updateStatusBar);
     updateStatusBar();
+
+    connect(ui->plainTextEdit->document(), &QTextDocument::modificationChanged,
+            this, &QWidget::setWindowModified);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::newFile);
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
+    connect(ui->actionSave, &QAction::triggered, this, [this] { saveFile(); });
+    connect(ui->actionSaveAs, &QAction::triggered, this, [this] { saveFileAs(); });
+    connect(ui->actionClose, &QAction::triggered, this, [this] { close(); });
+    connect(ui->actionExit, &QAction::triggered, qApp, &QApplication::closeAllWindows);
+    setCurrentFile(QString());
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setCurrentFile(const QString &path)
+{
+    currentFile = path;
+    setWindowTitle(tr("%1[*] - 简单文本编辑器")
+                       .arg(path.isEmpty() ? tr("未命名") : QFileInfo(path).fileName()));
+    ui->plainTextEdit->document()->setModified(false);
+    setWindowModified(false);
+}
+
+bool MainWindow::maybeSave()
+{
+    if (!ui->plainTextEdit->document()->isModified())
+        return true;
+    const auto answer = QMessageBox::warning(this, tr("未保存的修改"),
+        tr("当前文档已修改，是否保存？"),
+        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+        QMessageBox::Save);
+    if (answer == QMessageBox::Save)
+        return saveFile();
+    return answer == QMessageBox::Discard;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (maybeSave())
+        event->accept();
+    else
+        event->ignore();
+}
+
+void MainWindow::newFile()
+{
+    if (!maybeSave())
+        return;
+    ui->plainTextEdit->clear();
+    setCurrentFile(QString());
+}
+
+void MainWindow::openFile()
+{
+    const QString path = QFileDialog::getOpenFileName(this, tr("打开文本文件"),
+        currentFile, tr("文本文件 (*.txt);;所有文件 (*)"));
+    if (!path.isEmpty())
+        loadFile(path);
+}
+
+bool MainWindow::loadFile(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, tr("打开失败"), tr("无法读取文件：\n%1\n%2").arg(path, file.errorString()));
+        return false;
+    }
+    const QByteArray bytes = file.readAll();
+    if (file.error() != QFileDevice::NoError) {
+        QMessageBox::warning(this, tr("打开失败"), tr("读取文件失败：\n%1\n%2").arg(path, file.errorString()));
+        return false;
+    }
+    file.close();
+    // Validate the complete input before touching the current document or undo history.
+    QStringDecoder decoder(QStringDecoder::Utf8, QStringConverter::Flag::Stateless);
+    const QString text = decoder.decode(bytes);
+    if (decoder.hasError() || text.contains(QChar::Null)) {
+        QMessageBox::warning(this, tr("打开失败"), tr("文件不是有效的 UTF-8 文本，或含有二进制内容。原文档已保留。"));
+        return false;
+    }
+    if (!maybeSave())
+        return false;
+    ui->plainTextEdit->setPlainText(text);
+    setCurrentFile(QFileInfo(path).absoluteFilePath());
+    return true;
+}
+
+bool MainWindow::saveFile()
+{
+    return currentFile.isEmpty() ? saveFileAs() : writeFile(currentFile);
+}
+
+bool MainWindow::saveFileAs()
+{
+    const QString path = QFileDialog::getSaveFileName(this, tr("另存为"),
+        currentFile.isEmpty() ? tr("未命名.txt") : currentFile,
+        tr("文本文件 (*.txt);;所有文件 (*)"));
+    return !path.isEmpty() && writeFile(path);
+}
+
+bool MainWindow::writeFile(const QString &path)
+{
+    // Atomic replacement prevents a failed write from truncating the existing file.
+    QSaveFile file(path);
+    const QByteArray bytes = ui->plainTextEdit->toPlainText().toUtf8();
+    if (!file.open(QIODevice::WriteOnly) || file.write(bytes) != bytes.size() || !file.commit()) {
+        QMessageBox::warning(this, tr("保存失败"), tr("无法保存文件：\n%1\n%2").arg(path, file.errorString()));
+        return false;
+    }
+    setCurrentFile(QFileInfo(path).absoluteFilePath());
+    return true;
 }
 
 void MainWindow::updateStatusBar()
