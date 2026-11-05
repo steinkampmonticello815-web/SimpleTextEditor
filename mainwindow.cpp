@@ -39,6 +39,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // 菜单项和工具栏共用 QAction，两处会同步更新。
+    // 这些编辑动作没有 on_action... 自动槽，统一显式连接到编辑器内置槽。
+    connect(ui->actionUndo, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::undo);
+    connect(ui->actionRedo, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::redo);
+    connect(ui->actionSelectAll, &QAction::triggered,
+            ui->plainTextEdit, &QPlainTextEdit::selectAll);
+    connect(ui->plainTextEdit, &QPlainTextEdit::undoAvailable,
+            ui->actionUndo, &QAction::setEnabled);
+    connect(ui->plainTextEdit, &QPlainTextEdit::redoAvailable,
+            ui->actionRedo, &QAction::setEnabled);
+    ui->actionUndo->setEnabled(ui->plainTextEdit->document()->isUndoAvailable());
+    ui->actionRedo->setEnabled(ui->plainTextEdit->document()->isRedoAvailable());
+
     connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,
             ui->actionCut, &QAction::setEnabled);
     connect(ui->plainTextEdit, &QPlainTextEdit::copyAvailable,

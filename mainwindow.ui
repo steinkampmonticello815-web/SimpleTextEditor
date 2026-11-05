@@ -266,7 +266,7 @@
     <string>重做(&amp;R)</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Y</string>
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionCut">
