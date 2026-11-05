@@ -24,11 +24,14 @@ private slots:
     void on_actionWordWrap_toggled(bool checked);
     void on_actionAbout_triggered();
     void on_actionFind_triggered();
+    void on_actionFindNext_triggered();
     void on_actionReplace_triggered();
     void on_actionShowStatusbar_triggered(bool checked);
     void on_actionShowToolbar_triggered(bool checked);
 
 private:
+    void findNextText(const QString &text, QWidget *messageParent);
+    QString lastFindText;
     void closeEvent(QCloseEvent *event) override;
     bool maybeSave();
     bool saveFile();

@@ -344,7 +344,7 @@
     <string>查找下一个(&amp;N)</string>
    </property>
    <property name="shortcut">
-    <string>F3</string>
+    <string>Ctrl+G</string>
    </property>
   </action>
   <action name="actionReplace">

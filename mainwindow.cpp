@@ -232,14 +232,28 @@ void MainWindow::on_actionFind_triggered()
     FindDialog dialog(this);
     connect(&dialog, &FindDialog::findNextRequested, this,
             [this, &dialog](const QString &text) {
-        if (text.isEmpty()) {
-            QMessageBox::information(&dialog, tr("提示"), tr("请输入查找内容"));
-            return;
-        }
-        if (!findNext(ui->plainTextEdit, text))
-            QMessageBox::information(&dialog, tr("提示"), tr("没有找到该内容"));
+        findNextText(text, &dialog);
     });
     dialog.exec();
+}
+
+void MainWindow::findNextText(const QString &text, QWidget *messageParent)
+{
+    if (text.isEmpty()) {
+        QMessageBox::information(messageParent, tr("提示"), tr("请输入查找内容"));
+        return;
+    }
+    lastFindText = text;
+    if (!findNext(ui->plainTextEdit, text))
+        QMessageBox::information(messageParent, tr("提示"), tr("没有找到该内容"));
+}
+
+void MainWindow::on_actionFindNext_triggered()
+{
+    if (lastFindText.isEmpty())
+        on_actionFind_triggered();
+    else
+        findNextText(lastFindText, this);
 }
 
 void MainWindow::on_actionReplace_triggered()
